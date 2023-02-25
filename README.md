@@ -15,7 +15,7 @@
 ## Why is this project of interest to you?
 
 I have always been very passionate about personal finance. Usually I track
-my finances using a spreadsheet, but I while talking to my peers I have
+my finances using a spreadsheet, but while talking to my peers I have
 realised that it is quite tedious for people to create a spreadsheet
 and constantly update it. An app would make it much easier for
 data entry and also to get insights from that data as to how
@@ -30,3 +30,7 @@ a person's finances have improved from a previous time frame.
 - As a user, I want to be able to add a new category if it does not exist.
 - As a user, I want to be able to see my greatest expense for the month.
 - As a user, I want to be able to see the category that I spend the most on.
+
+
+Transaction as an interface. Then FoodCategory would implement that interface.
+Implement the first User Story because that is a requirement for phase 1.
