@@ -21,9 +21,9 @@ public class TransactionSummaryTest {
         d2 = LocalDate.parse("2023-02-27");
         d3 = LocalDate.parse("2023-07-24");
 
-        t1 = new Transaction(0, d1, "Tim Horton's", 20, "Food");
-        t2 = new Transaction(1, d2, "ROGER'S", 40, "Phone");
-        t3 = new Transaction(2, d3, "Laundry", 100, "Essentials");
+        t1 = new Transaction(d1, "Tim Horton's", 20, "Food");
+        t2 = new Transaction(d2, "ROGER'S", 40, "Phone");
+        t3 = new Transaction(d3, "Laundry", 100, "Essentials");
     }
 
     @Test
@@ -44,7 +44,7 @@ public class TransactionSummaryTest {
 
     @Test
     void removeTransactionTestOne () {
-        Transaction t1 = new Transaction(0, d1, "Tim Horton's", 20, "Food");
+        Transaction t1 = new Transaction(d1, "Tim Horton's", 20, "Food");
 
         ts1.addTransaction(t1);
 
