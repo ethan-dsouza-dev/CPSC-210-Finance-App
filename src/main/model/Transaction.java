@@ -9,8 +9,9 @@ public class Transaction {
     private String category;
 
 
-    // MODIFIES: this
-    // EFFECTS: creates a new Transaction object with fields set to given values.
+    /**
+     * @EFFECTS: creates a new Transaction object with fields set to given values.
+     */
     public Transaction(String date, String detail, double amount, String category) {
         this.date = date;
         this.details = detail;
@@ -22,31 +23,51 @@ public class Transaction {
         return this.date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    /**
+     *
+     * @MODIFIES: this
+     * @EFFECTS: sets the date field to newDate.
+     */
+    public void setDate(String newDate) {
+        this.date = newDate;
     }
 
     public String getDetails() {
         return this.details;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    /**
+     *
+     * @MODIFIES: this
+     * @EFFECTS: sets the details field to newDetails.
+     */
+    public void setDetails(String newDetails) {
+        this.details = newDetails;
     }
 
     public double getAmount() {
         return this.amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    /**
+     *
+     * @MODIFIES: this
+     * @EFFECTS: sets the amount field to newAmount.
+     */
+    public void setAmount(double newAmount) {
+        this.amount = newAmount;
     }
 
     public String getCategory() {
         return this.category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    /**
+     *
+     * @MODIFIES: this
+     * @EFFECTS: sets the category field to newCategory.
+     */
+    public void setCategory(String newCategory) {
+        this.category = newCategory;
     }
 }
