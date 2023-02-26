@@ -4,6 +4,7 @@ import model.Transaction;
 import model.TransactionSummary;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +12,12 @@ public class FinanceApp {
 
     private Scanner scanner;
     private TransactionSummary transactionSummary;
+    private Transaction t1;
+    private Transaction t2;
+    private Transaction t3;
+
+    private LocalDate d1, d2, d3;
+
 
     /**
      * @EFFECTS: creates a new instance of a FinanceApp
@@ -18,6 +25,18 @@ public class FinanceApp {
     public FinanceApp() {
         transactionSummary = new TransactionSummary();
         scanner = new Scanner(System.in);
+
+        d1 = LocalDate.parse("2023-05-25");
+        d2 = LocalDate.parse("2023-02-27");
+        d3 = LocalDate.parse("2023-07-24");
+
+        t1 = new Transaction(d1, "Tim Horton's", 20, "Food");
+        t2 = new Transaction(d2, "ROGER'S", 40, "Phone");
+        t3 = new Transaction(d3, "Laundry", 100, "Essentials");
+
+        transactionSummary.addTransaction(t1);
+        transactionSummary.addTransaction(t2);
+        transactionSummary.addTransaction(t3);
         runMenu();
     }
 
@@ -99,12 +118,11 @@ public class FinanceApp {
     public void addTransaction() {
         ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
 
-        if (summary.size() == 0) {
+        try {
             transactionSummary.addTransaction(collectTransactionData());
             System.out.println("Added Transaction");
-        } else {
-            transactionSummary.addTransaction(collectTransactionData());
-            System.out.println("Added Transaction");
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid Date");
         }
 
     }
@@ -125,7 +143,7 @@ public class FinanceApp {
 
     /**
      * @EFFECTS: collects data from the user about the transaction and creates a
-     *           new Transaction object with those details.
+     * new Transaction object with those details.
      */
     public Transaction collectTransactionData() {
         System.out.println("Enter Date ");
@@ -154,9 +172,7 @@ public class FinanceApp {
 
         Transaction newTransaction = new Transaction(date, transactionDetail, transactionAmount,
                 transactionCategory);
-
         return newTransaction;
-
     }
 
     /**
@@ -201,7 +217,6 @@ public class FinanceApp {
         System.out.println("Removed Transaction");
         System.out.println("Here is your new transaction summary:");
         displayTransactionSummary();
-        scanner.nextLine();
     }
 
     /**
