@@ -29,6 +29,6 @@ a person's finances have improved from a previous time frame.
 - As a user, I want to be able to categorise each transaction.
 - As a user, I want to be able to see my greatest expense for the month.
 
-#### “Stretch Goals: Not Implemented Yet”
+#### Stretch Goals: Not Implemented Yet
 - As a user, I want to be able to add a new category if it does not exist.
 - As a user, I want to be able to see the category that I spend the most on.

@@ -100,10 +100,10 @@ public class FinanceApp {
         ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
 
         if (summary.size() == 0) {
-            transactionSummary.addTransaction(collectTransactionData(0));
+            transactionSummary.addTransaction(collectTransactionData());
             System.out.println("Added Transaction");
         } else {
-            transactionSummary.addTransaction(collectTransactionData(getLastIndex() + 1));
+            transactionSummary.addTransaction(collectTransactionData());
             System.out.println("Added Transaction");
         }
 
@@ -113,6 +113,7 @@ public class FinanceApp {
      * @REQUIRES: the list must have atleast one element.
      * @EFFECTS: returns the index of the last transaction in transactionSummary.
      */
+    /*
     public int getLastIndex() {
         ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
 
@@ -120,12 +121,13 @@ public class FinanceApp {
         int lastIndex = lastTransaction.getIndex();
         return lastIndex;
     }
+    */
 
     /**
      * @EFFECTS: collects data from the user about the transaction and creates a
      *           new Transaction object with those details.
      */
-    public Transaction collectTransactionData(int index) {
+    public Transaction collectTransactionData() {
         System.out.println("Enter Date ");
 
         System.out.println("Enter the year: ");
@@ -150,7 +152,7 @@ public class FinanceApp {
         System.out.println("\nEnter Category: ");
         String transactionCategory = scanner.nextLine();
 
-        Transaction newTransaction = new Transaction(index, date, transactionDetail, transactionAmount,
+        Transaction newTransaction = new Transaction(date, transactionDetail, transactionAmount,
                 transactionCategory);
 
         return newTransaction;
@@ -164,8 +166,11 @@ public class FinanceApp {
         System.out.println("----------------------------------\n");
         System.out.println("Index, Date, Details, Amount, Category\n");
 
-        for (Transaction transaction : transactionSummary.getTransactionSummary()) {
-            displayTransaction(transaction);
+        ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
+
+        for (int i = 0; i < summary.size(); i++) {
+            Transaction transaction = summary.get(i);
+            displayTransaction(transaction, i);
         }
 
         System.out.println("----------------------------------\n");
@@ -175,8 +180,8 @@ public class FinanceApp {
     /**
      * @EFFECTS: displays parameters of a Transaction object to the console.
      */
-    private void displayTransaction(Transaction transaction) {
-        System.out.print(transaction.getIndex() + "\t");
+    private void displayTransaction(Transaction transaction, int index) {
+        System.out.print(index + "\t");
         System.out.print(transaction.getDate() + "\t");
         System.out.print(transaction.getDetails() + "\t");
         System.out.print(transaction.getAmount() + "\t");
@@ -194,6 +199,8 @@ public class FinanceApp {
         int index = scanner.nextInt();
         transactionSummary.removeTransaction(index);
         System.out.println("Removed Transaction");
+        System.out.println("Here is your new transaction summary:");
+        displayTransactionSummary();
         scanner.nextLine();
     }
 
@@ -205,7 +212,7 @@ public class FinanceApp {
         System.out.println("Your greatest expense is shown below: ");
         highestExpense = transactionSummary.findGreatestTransaction();
         System.out.println("Date, Details, Amount, Category\n");
-        displayTransaction(highestExpense);
+        displayTransaction(highestExpense, 0);
     }
 
 
