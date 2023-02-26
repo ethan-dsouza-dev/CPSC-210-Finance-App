@@ -3,19 +3,27 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TransactionSummaryTest {
 
     private TransactionSummary ts1;
     private Transaction t1, t2, t3;
+    private LocalDate d1, d2, d3;
 
     @BeforeEach
     void setup() {
         ts1 = new TransactionSummary();
-        t1 = new Transaction("2/25/2023", "Tim Horton's", 20, "Food");
-        t2 = new Transaction("2/27/2023", "ROGER'S", 40, "Phone");
-        t3 = new Transaction("2023-05-25", "Laundry", 100, "Essentials");
+
+        d1 = LocalDate.parse("2023-05-25");
+        d2 = LocalDate.parse("2023-02-27");
+        d3 = LocalDate.parse("2023-07-24");
+
+        t1 = new Transaction(0, d1, "Tim Horton's", 20, "Food");
+        t2 = new Transaction(1, d2, "ROGER'S", 40, "Phone");
+        t3 = new Transaction(2, d3, "Laundry", 100, "Essentials");
     }
 
     @Test
@@ -36,7 +44,7 @@ public class TransactionSummaryTest {
 
     @Test
     void removeTransactionTestOne () {
-        Transaction t1 = new Transaction("2/25/2023", "Tim Horton's", 20, "Food");
+        Transaction t1 = new Transaction(0, d1, "Tim Horton's", 20, "Food");
 
         ts1.addTransaction(t1);
 

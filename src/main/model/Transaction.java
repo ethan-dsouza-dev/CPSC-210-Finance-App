@@ -1,9 +1,11 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
-    private String date;
+    private int index;
+    private LocalDate date;
     private String details;
     private double amount;
     private String category;
@@ -12,14 +14,19 @@ public class Transaction {
     /**
      * @EFFECTS: creates a new Transaction object with fields set to given values.
      */
-    public Transaction(String date, String detail, double amount, String category) {
+    public Transaction(int index, LocalDate date, String detail, double amount, String category) {
+        this.index = index;
         this.date = date;
         this.details = detail;
         this.amount = amount;
         this.category = category;
     }
 
-    public String getDate() {
+    public int getIndex() {
+        return this.index;
+    }
+
+    public LocalDate getDate() {
         return this.date;
     }
 

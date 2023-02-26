@@ -32,7 +32,3 @@ a person's finances have improved from a previous time frame.
 #### “Stretch Goals: Not Implemented Yet”
 - As a user, I want to be able to add a new category if it does not exist.
 - As a user, I want to be able to see the category that I spend the most on.
-
-
-Transaction as an interface. Then FoodCategory would implement that interface.
-Implement the first User Story because that is a requirement for phase 1.

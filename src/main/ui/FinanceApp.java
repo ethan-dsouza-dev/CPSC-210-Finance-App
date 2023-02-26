@@ -3,6 +3,8 @@ package ui;
 import model.Transaction;
 import model.TransactionSummary;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FinanceApp {
@@ -95,18 +97,48 @@ public class FinanceApp {
      * @EFFECTS: adds a transaction to the transaction summary
      */
     public void addTransaction() {
-        transactionSummary.addTransaction(collectTransactionData());
-        System.out.println("Added Transaction");
+        ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
+
+        if (summary.size() == 0) {
+            transactionSummary.addTransaction(collectTransactionData(0));
+            System.out.println("Added Transaction");
+        } else {
+            transactionSummary.addTransaction(collectTransactionData(getLastIndex() + 1));
+            System.out.println("Added Transaction");
+        }
+
+    }
+
+    /**
+     * @REQUIRES: the list must have atleast one element.
+     * @EFFECTS: returns the index of the last transaction in transactionSummary.
+     */
+    public int getLastIndex() {
+        ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
+
+        Transaction lastTransaction = summary.get(transactionSummary.getTransactionSummary().size() - 1);
+        int lastIndex = lastTransaction.getIndex();
+        return lastIndex;
     }
 
     /**
      * @EFFECTS: collects data from the user about the transaction and creates a
      *           new Transaction object with those details.
      */
-    public Transaction collectTransactionData() {
+    public Transaction collectTransactionData(int index) {
+        System.out.println("Enter Date ");
 
-        System.out.println("Enter Date: ");
-        String transactionDate = scanner.nextLine();
+        System.out.println("Enter the year: ");
+        String year = scanner.nextLine();
+
+        System.out.println("Enter the month:");
+        String month = scanner.nextLine();
+
+        System.out.println("Enter the day: ");
+        String day = scanner.nextLine();
+
+        String transactionDate = year + '-' + month + '-' + day;
+        LocalDate date = LocalDate.parse(transactionDate);
 
         System.out.println("\nEnter Details: ");
         String transactionDetail = scanner.nextLine();
@@ -118,7 +150,7 @@ public class FinanceApp {
         System.out.println("\nEnter Category: ");
         String transactionCategory = scanner.nextLine();
 
-        Transaction newTransaction = new Transaction(transactionDate, transactionDetail, transactionAmount,
+        Transaction newTransaction = new Transaction(index, date, transactionDetail, transactionAmount,
                 transactionCategory);
 
         return newTransaction;
@@ -130,7 +162,7 @@ public class FinanceApp {
      */
     public void displayTransactionSummary() {
         System.out.println("----------------------------------\n");
-        System.out.println("Date, Details, Amount, Category\n");
+        System.out.println("Index, Date, Details, Amount, Category\n");
 
         for (Transaction transaction : transactionSummary.getTransactionSummary()) {
             displayTransaction(transaction);
@@ -144,6 +176,7 @@ public class FinanceApp {
      * @EFFECTS: displays parameters of a Transaction object to the console.
      */
     private void displayTransaction(Transaction transaction) {
+        System.out.print(transaction.getIndex() + "\t");
         System.out.print(transaction.getDate() + "\t");
         System.out.print(transaction.getDetails() + "\t");
         System.out.print(transaction.getAmount() + "\t");
@@ -161,6 +194,7 @@ public class FinanceApp {
         int index = scanner.nextInt();
         transactionSummary.removeTransaction(index);
         System.out.println("Removed Transaction");
+        scanner.nextLine();
     }
 
     /**
