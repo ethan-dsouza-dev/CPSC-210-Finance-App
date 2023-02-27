@@ -10,6 +10,7 @@ public class Transaction {
 
 
     /**
+     * @REQUIRES: date to be in the format "yyyy-mm-dd"
      * @EFFECTS: creates a new Transaction object with fields set to given values.
      */
     public Transaction(LocalDate date, String detail, double amount, String category) {

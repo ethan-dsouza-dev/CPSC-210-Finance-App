@@ -1,5 +1,8 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class TransactionSummary {
@@ -38,7 +41,6 @@ public class TransactionSummary {
     }
 
     /**
-     *
      * @REQUIRES: an element to exist at given index
      * @EFFECTS: returns transaction at given index
      */
@@ -56,6 +58,26 @@ public class TransactionSummary {
 
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > maxAmount) {
+                maxAmountTransaction = transaction;
+                maxAmount = (int) transaction.getAmount();
+            }
+        }
+        return maxAmountTransaction;
+    }
+
+    public Transaction findGreatestTransactionForMonth() {
+        Transaction maxAmountTransaction = null;
+        int maxAmount = 0;
+        int numberOfElements = transactions.size();
+        LocalDate now = LocalDate.now(); // 2015-11-24
+        LocalDate pastMonth = now.minusMonths(1);
+
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = transaction.getDate();
+
+            long diff = ChronoUnit.DAYS.between(transactionDate, now);
+
+            if (transaction.getAmount() > maxAmount && diff < 30) {
                 maxAmountTransaction = transaction;
                 maxAmount = (int) transaction.getAmount();
             }

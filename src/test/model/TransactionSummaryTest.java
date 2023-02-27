@@ -96,4 +96,13 @@ public class TransactionSummaryTest {
         System.out.println(ts1.findGreatestTransaction());
     }
 
+    @Test
+    void findGreatestTransactionForMonth() {
+        ts1.addTransaction(t1);
+        ts1.addTransaction(t3);
+        ts1.addTransaction(t2);
+
+        assertEquals(t3, ts1.findGreatestTransactionForMonth());
+    }
+
 }

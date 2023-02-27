@@ -26,11 +26,11 @@ public class FinanceApp {
         transactionSummary = new TransactionSummary();
         scanner = new Scanner(System.in);
 
-        d1 = LocalDate.parse("2023-05-25");
-        d2 = LocalDate.parse("2023-02-27");
-        d3 = LocalDate.parse("2023-07-24");
+        d1 = LocalDate.parse("2022-05-25");
+        d2 = LocalDate.parse("2023-02-25");
+        d3 = LocalDate.parse("2023-02-24");
 
-        t1 = new Transaction(d1, "Tim Horton's", 20, "Food");
+        t1 = new Transaction(d1, "Tim Horton's", 200, "Food");
         t2 = new Transaction(d2, "ROGER'S", 40, "Phone");
         t3 = new Transaction(d3, "Laundry", 100, "Essentials");
 
@@ -128,20 +128,6 @@ public class FinanceApp {
     }
 
     /**
-     * @REQUIRES: the list must have atleast one element.
-     * @EFFECTS: returns the index of the last transaction in transactionSummary.
-     */
-    /*
-    public int getLastIndex() {
-        ArrayList<Transaction> summary = transactionSummary.getTransactionSummary();
-
-        Transaction lastTransaction = summary.get(transactionSummary.getTransactionSummary().size() - 1);
-        int lastIndex = lastTransaction.getIndex();
-        return lastIndex;
-    }
-    */
-
-    /**
      * @EFFECTS: collects data from the user about the transaction and creates a
      * new Transaction object with those details.
      */
@@ -225,8 +211,8 @@ public class FinanceApp {
     public void displayGreatestExpense() {
         Transaction highestExpense = null;
         System.out.println("Your greatest expense is shown below: ");
-        highestExpense = transactionSummary.findGreatestTransaction();
-        System.out.println("Date, Details, Amount, Category\n");
+        highestExpense = transactionSummary.findGreatestTransactionForMonth();
+        System.out.println("Index, Date, Details, Amount, Category\n");
         displayTransaction(highestExpense, 0);
     }
 
