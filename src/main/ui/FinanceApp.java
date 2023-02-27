@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Finance Tracker Application
 public class FinanceApp {
 
     private Scanner scanner;
@@ -211,7 +212,7 @@ public class FinanceApp {
     public void displayGreatestExpense() {
         Transaction highestExpense = null;
         System.out.println("Your greatest expense is shown below: ");
-        highestExpense = transactionSummary.findGreatestTransactionForMonth();
+        highestExpense = transactionSummary.findGreatestTransactionForMonth(LocalDate.now());
         System.out.println("Index, Date, Details, Amount, Category\n");
         displayTransaction(highestExpense, 0);
     }

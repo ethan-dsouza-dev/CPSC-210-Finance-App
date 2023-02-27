@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
+// Represents a transaction with multiple attributes.
 public class Transaction {
     private LocalDate date;
     private String details;

@@ -97,12 +97,59 @@ public class TransactionSummaryTest {
     }
 
     @Test
-    void findGreatestTransactionForMonth() {
+    void findGreatestTransactionForMonthNormal() {
         ts1.addTransaction(t1);
         ts1.addTransaction(t3);
         ts1.addTransaction(t2);
 
-        assertEquals(t3, ts1.findGreatestTransactionForMonth());
+        LocalDate now = LocalDate.of(2023, 02, 25);
+
+        assertEquals(t3, ts1.findGreatestTransactionForMonth(now));
+    }
+
+    @Test
+    void findGreatestTransactionForMonthBoundary() {
+        LocalDate d4 = LocalDate.of(2023, 01, 27);
+        Transaction t4 = new Transaction(d4, "Banana", 500, "Food");
+
+        ts1.addTransaction(t1);
+        ts1.addTransaction(t3);
+        ts1.addTransaction(t2);
+        ts1.addTransaction(t4);
+
+        LocalDate now = LocalDate.of(2023, 02, 25);
+
+        assertEquals(t4, ts1.findGreatestTransactionForMonth(now));
+    }
+
+    @Test
+    void findGreatestTransactionForMonthEqual() {
+        LocalDate d4 = LocalDate.of(2023, 01, 26);
+        Transaction t4 = new Transaction(d4, "Banana", 500, "Food");
+
+        ts1.addTransaction(t1);
+        ts1.addTransaction(t3);
+        ts1.addTransaction(t2);
+        ts1.addTransaction(t4);
+
+        LocalDate now = LocalDate.of(2023, 02, 25);
+
+        assertEquals(t4, ts1.findGreatestTransactionForMonth(now));
+    }
+
+    @Test
+    void findGreatestTransactionForMonthAbnormal() {
+        LocalDate d4 = LocalDate.of(2022, 01, 25);
+        Transaction t4 = new Transaction(d4, "Banana", 500, "Food");
+
+        ts1.addTransaction(t1);
+        ts1.addTransaction(t3);
+        ts1.addTransaction(t2);
+        ts1.addTransaction(t4);
+
+        LocalDate now = LocalDate.of(2023, 02, 25);
+
+        assertEquals(t3, ts1.findGreatestTransactionForMonth(now));
     }
 
 }

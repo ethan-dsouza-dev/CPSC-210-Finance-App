@@ -5,6 +5,7 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+// Represents a Transaction summary (a list of transactions) and the methods that can be done on the list.
 public class TransactionSummary {
 
     private ArrayList<Transaction> transactions;
@@ -65,19 +66,21 @@ public class TransactionSummary {
         return maxAmountTransaction;
     }
 
-    public Transaction findGreatestTransactionForMonth() {
+    /**
+     * @REQUIRES: transactionSummary should not be empty
+     * @EFFECTS: returns the largest expense for the month.
+     */
+    public Transaction findGreatestTransactionForMonth(LocalDate now) {
         Transaction maxAmountTransaction = null;
         int maxAmount = 0;
         int numberOfElements = transactions.size();
-        LocalDate now = LocalDate.now(); // 2015-11-24
-        LocalDate pastMonth = now.minusMonths(1);
 
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = transaction.getDate();
 
             long diff = ChronoUnit.DAYS.between(transactionDate, now);
 
-            if (transaction.getAmount() > maxAmount && diff < 30) {
+            if ((transaction.getAmount() > maxAmount) && (diff <= 30)) {
                 maxAmountTransaction = transaction;
                 maxAmount = (int) transaction.getAmount();
             }
