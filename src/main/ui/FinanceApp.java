@@ -13,12 +13,6 @@ public class FinanceApp {
 
     private Scanner scanner;
     private TransactionSummary transactionSummary;
-    private Transaction t1;
-    private Transaction t2;
-    private Transaction t3;
-
-    private LocalDate d1, d2, d3;
-
 
     /**
      * @EFFECTS: creates a new instance of a FinanceApp
@@ -27,17 +21,6 @@ public class FinanceApp {
         transactionSummary = new TransactionSummary();
         scanner = new Scanner(System.in);
 
-        d1 = LocalDate.parse("2022-05-25");
-        d2 = LocalDate.parse("2023-02-25");
-        d3 = LocalDate.parse("2023-02-24");
-
-        t1 = new Transaction(d1, "Tim Horton's", 200, "Food");
-        t2 = new Transaction(d2, "ROGER'S", 40, "Phone");
-        t3 = new Transaction(d3, "Laundry", 100, "Essentials");
-
-        transactionSummary.addTransaction(t1);
-        transactionSummary.addTransaction(t2);
-        transactionSummary.addTransaction(t3);
         runMenu();
     }
 
