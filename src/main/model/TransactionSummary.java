@@ -33,7 +33,7 @@ public class TransactionSummary {
     }
 
     /**
-     * @REQUIRES: transaction to be in list
+     * @REQUIRES: index to be in range
      * @MODIFIES: this
      * @EFFECTS: removes the transaction at given index
      */
@@ -68,7 +68,7 @@ public class TransactionSummary {
 
     /**
      * @REQUIRES: transactionSummary should not be empty
-     * @EFFECTS: returns the largest expense for the month.
+     * @EFFECTS: returns the largest expense amount for the month.
      */
     public Transaction findGreatestTransactionForMonth(LocalDate now) {
         Transaction maxAmountTransaction = null;
