@@ -113,17 +113,4 @@ public class TransactionSummary implements Writable {
 
         return jsonArray;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TransactionSummary summary = (TransactionSummary) o;
-        return transactions.equals(summary.transactions);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(transactions);
-    }
 }
