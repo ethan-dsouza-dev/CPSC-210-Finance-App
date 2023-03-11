@@ -2,7 +2,11 @@ package ui;
 
 import model.Transaction;
 import model.TransactionSummary;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -14,12 +18,19 @@ public class FinanceApp {
     private Scanner scanner;
     private TransactionSummary transactionSummary;
 
+    private static final String JSON_STORE = "./data/summary.json";
+    private TransactionSummary summary;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
     /**
      * @EFFECTS: creates a new instance of a FinanceApp
      */
     public FinanceApp() {
         transactionSummary = new TransactionSummary();
         scanner = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         runMenu();
     }
@@ -57,6 +68,8 @@ public class FinanceApp {
         System.out.println("\tB - View Transaction Summary");
         System.out.println("\tC - Remove Transaction");
         System.out.println("\tD - Find largest expense");
+        System.out.println("\tE - Save Transaction Summary");
+        System.out.println("\tF - Load Transaction Summary");
 
         System.out.println("\tQ - Quit");
 
@@ -79,6 +92,12 @@ public class FinanceApp {
             pauseMenu();
         } else if (choice.equals("D")) {
             displayGreatestExpense();
+            pauseMenu();
+        } else if (choice.equals("E")) {
+            saveTransactionSummary();
+            pauseMenu();
+        } else if (choice.equals("F")) {
+            loadTransactionSummary();
             pauseMenu();
         } else {
             System.out.println("Selection not valid...");
@@ -198,6 +217,28 @@ public class FinanceApp {
         highestExpense = transactionSummary.findGreatestTransactionForMonth(LocalDate.now());
         System.out.println("Index, Date, Details, Amount, Category\n");
         displayTransaction(highestExpense, 0);
+    }
+
+    public void saveTransactionSummary() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(transactionSummary);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads transactionSummary from file
+    public void loadTransactionSummary() {
+        try {
+            transactionSummary = jsonReader.read();
+            System.out.println("Loaded transaction summary" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 

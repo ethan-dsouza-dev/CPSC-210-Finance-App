@@ -1,13 +1,17 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Objects;
 
 // Represents a Transaction summary (a list of transactions) and the methods that can be done on the list.
-public class TransactionSummary {
-
+public class TransactionSummary implements Writable {
     private ArrayList<Transaction> transactions;
 
     /**
@@ -86,5 +90,40 @@ public class TransactionSummary {
             }
         }
         return maxAmountTransaction;
+    }
+
+    public int getNumberTransactions() {
+        return transactions.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("transactions", transactionsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns transactions in this transactionSummary as a JSON array
+    private JSONArray transactionsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Transaction t : transactions) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransactionSummary summary = (TransactionSummary) o;
+        return transactions.equals(summary.transactions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactions);
     }
 }

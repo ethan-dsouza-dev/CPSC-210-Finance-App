@@ -1,0 +1,14 @@
+{"transactions": [
+    {
+        "date": "2023-03-07",
+        "amount": 277,
+        "details": "Health and Dental",
+        "category": "Health"
+    },
+    {
+        "date": "2023-03-07",
+        "amount": 50,
+        "details": "Mouse",
+        "category": "Tech"
+    }
+]}

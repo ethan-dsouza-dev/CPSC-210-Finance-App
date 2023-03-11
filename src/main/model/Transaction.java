@@ -1,6 +1,9 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.time.LocalDate;
+import java.util.Objects;
 
 // Represents a transaction with multiple attributes.
 public class Transaction {
@@ -40,4 +43,25 @@ public class Transaction {
         return this.category;
     }
 
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("date", date.toString());
+        json.put("details", details);
+        json.put("amount", amount);
+        json.put("category", category);
+        return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return date.equals(that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date);
+    }
 }
