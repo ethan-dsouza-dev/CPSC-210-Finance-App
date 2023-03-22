@@ -219,6 +219,10 @@ public class FinanceApp {
         displayTransaction(highestExpense, 0);
     }
 
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: saves transactionSummary to json file.
+     */
     public void saveTransactionSummary() {
         try {
             jsonWriter.open();
