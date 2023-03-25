@@ -32,7 +32,8 @@ public class FinanceApp {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        runMenu();
+        //runMenu();
+        GUI runGui = new GUI();
     }
 
     /**
