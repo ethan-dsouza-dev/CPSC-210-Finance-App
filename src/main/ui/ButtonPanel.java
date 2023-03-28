@@ -1,6 +1,5 @@
 package ui;
 
-import model.Transaction;
 import model.TransactionSummary;
 
 import javax.swing.*;
@@ -14,6 +13,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton saveButton;
     private JButton loadButton;
     private JFrame frame;
+    private AddTransactionPane addTransactionPane;
 
 
     public ButtonPanel(JFrame frame) {
@@ -27,7 +27,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
         createLoadButton();
 
         this.setBackground(Color.green);
-        // this.setLayout(new GridLayout(1, 4, 0, 0));
         this.setPreferredSize(new Dimension(100, 60));
         this.add(addTransactionBtn);
         this.add(removeTransactionBtn);
@@ -39,7 +38,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
         addTransactionBtn = new JButton("Add");
         addTransactionBtn.setActionCommand("addTransaction");
         addTransactionBtn.addActionListener(this);
-        //addTransactionBtn.setBounds(0, 0, 25, 12);
     }
 
     private void createRemoveButton() {
@@ -70,8 +68,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == addTransactionBtn) {
-            frame.setTitle("Added Transaction");
+        if (e.getActionCommand().equals("addTransaction")) {
+            addTransactionPane = new AddTransactionPane(new TransactionSummary());
         }
         if (e.getActionCommand().equals("removeTransaction")) {
             frame.setTitle("Remove Transaction");
