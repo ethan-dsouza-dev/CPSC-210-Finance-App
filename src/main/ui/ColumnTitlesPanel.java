@@ -14,13 +14,39 @@ public class ColumnTitlesPanel extends JPanel  {
         details = new JLabel("Details");
         amount = new JLabel("Amount");
         category = new JLabel("Category");
-        date.setHorizontalAlignment(JLabel.CENTER);
-        this.setLayout(new GridLayout(1,1));
-        this.setBackground(Color.decode("0xc2c36e"));
+
+
+        this.setLayout(new GridLayout(1,1, 2, 0));
+        this.setBackground(Color.LIGHT_GRAY);
         add(date);
         add(details);
         add(amount);
         add(category);
 
+        centerTitles();
+        setLabelBackgrounds();
+    }
+
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: centers all labels in this Panel
+     */
+    private void centerTitles() {
+        Component[] labels = this.getComponents();
+        for (Component c : labels) {
+            if (c instanceof JLabel) {
+                ((JLabel) c).setHorizontalAlignment(JLabel.CENTER);
+            }
+        }
+    }
+
+
+    private void setLabelBackgrounds() {
+        Component[] labels = this.getComponents();
+        for (Component c : labels) {
+            if (c instanceof JLabel) {
+                ((JLabel) c).setBackground(Color.BLUE);
+            }
+        }
     }
 }

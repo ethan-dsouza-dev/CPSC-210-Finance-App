@@ -234,8 +234,11 @@ public class FinanceApp {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads transactionSummary from file
+
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: loads transactionSummary from file
+     */
     public void loadTransactionSummary() {
         try {
             transactionSummary = jsonReader.read();

@@ -46,6 +46,18 @@ public class TransactionSummary implements Writable {
     }
 
     /**
+     * @MODIFIES: this
+     * @EFFECTS: removes transactions with a given detail
+     */
+    public void removeTransactionWithDetails(String detail) {
+        for (int i = 0; i < transactions.size(); i++) {
+            if (transactions.get(i).getDetails().equals(detail)) {
+                removeTransaction(i);
+            }
+        }
+    }
+
+    /**
      * @REQUIRES: an element to exist at given index
      * @EFFECTS: returns transaction at given index
      */
@@ -110,7 +122,6 @@ public class TransactionSummary implements Writable {
         for (Transaction t : transactions) {
             jsonArray.put(t.toJson());
         }
-
         return jsonArray;
     }
 }

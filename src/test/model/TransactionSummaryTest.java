@@ -152,4 +152,23 @@ public class TransactionSummaryTest {
         assertEquals(t3, ts1.findGreatestTransactionForMonth(now));
     }
 
+    @Test
+    void removeTransactionWithDetails() {
+        LocalDate d4 = LocalDate.of(2023, 01, 26);
+        Transaction t4 = new Transaction(d4, "Banana", 500, "Food");
+
+        ts1.addTransaction(t1);
+        ts1.addTransaction(t2);
+        ts1.addTransaction(t3);
+        ts1.addTransaction(t4);
+        ts1.removeTransactionWithDetails("Banana");
+
+        assertTrue(ts1.getTransactionSummary().contains(t1));
+        assertTrue(ts1.getTransactionSummary().contains(t2));
+        assertTrue(ts1.getTransactionSummary().contains(t3));
+        assertFalse(ts1.getTransactionSummary().contains(t4));
+
+
+    }
+
 }
