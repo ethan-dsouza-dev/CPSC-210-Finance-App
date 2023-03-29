@@ -4,18 +4,9 @@ import model.Transaction;
 import model.TransactionSummary;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 public class GUI extends JFrame {
-
-    private JLabel label;
-    private JTextField field;
-    private JButton loadButton;
 
     private JPanel buttonPanel;
     private TransactionSummaryPanel summaryPanel;

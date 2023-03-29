@@ -20,7 +20,7 @@ public class TransactionSummaryPanel extends JPanel {
      */
     public TransactionSummaryPanel(JFrame frame, TransactionSummary ts) {
         setBackground(Color.BLACK);
-        setLayout(new GridLayout(1, 4, 2, 0));
+        setLayout(new GridLayout(1, 4, 2, 2));
 
         displayTransactions(ts);
     }

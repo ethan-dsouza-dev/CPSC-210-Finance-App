@@ -4,6 +4,7 @@ import model.Transaction;
 import model.TransactionSummary;
 
 import javax.swing.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -18,10 +19,15 @@ public class AddTransactionPane {
     private TransactionSummaryPanel summaryPanel;
     private JFrame frame;
 
-    public AddTransactionPane(TransactionSummary transactionSummary, TransactionSummaryPanel summaryPanel, JFrame frame) {
+    /**
+     * @EFFECTS: creates a new AddTransactionPane with fields initialised to JFormattedTextFields
+     */
+    public AddTransactionPane(TransactionSummary transactionSummary, TransactionSummaryPanel summaryPanel,
+                              JFrame frame) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateField = new JFormattedTextField(dateFormat);
         detailsField = new JTextField();
+
         amountField = new JFormattedTextField();
         categoryField = new JTextField();
 
@@ -44,6 +50,11 @@ public class AddTransactionPane {
         addToTransactionSummary(transactionSummary, option);
     }
 
+    /**
+     * @REQUIRES: amountField to be a String that can be parsed to an int.
+     * @MODIFIES: this
+     * @EFFECTS: if the Ok button is pressed then the transaciton is added to transactionSummary
+     */
     private void addToTransactionSummary(TransactionSummary transactionSummary, int option) {
         if (option == JOptionPane.OK_OPTION) {
             try {
@@ -53,8 +64,10 @@ public class AddTransactionPane {
             } catch (DateTimeParseException e) {
                 JOptionPane.showMessageDialog(null, "Date was not formatted correctly!",
                         "Date Parse Error", JOptionPane.INFORMATION_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Amount was not formatted correctly!",
+                        "Amount Parse Error", JOptionPane.INFORMATION_MESSAGE);
             }
-            System.out.println(transactionSummary.getNumberTransactions());
         }
     }
 
@@ -64,9 +77,7 @@ public class AddTransactionPane {
      */
     private void updateScreen(Transaction newTransaction) {
         summary.addTransaction(newTransaction);
-        summaryPanel.resetColumns();
-        summaryPanel.revalidate();
-        summaryPanel.repaint();
+        summaryPanel.removeAll();
         summaryPanel.displayTransactions(this.summary);
         summaryPanel.revalidate();
         summaryPanel.repaint();

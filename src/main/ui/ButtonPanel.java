@@ -29,11 +29,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
     public ButtonPanel(JFrame frame, TransactionSummaryPanel summaryPanel, TransactionSummary ts) {
 
         super();
-        this.frame = frame;
-        this.summary = ts;
-        this.summaryPanel = summaryPanel;
-        this.jsonReader = new JsonReader(JSON_STORE);
-        this.jsonWriter = new JsonWriter(JSON_STORE);
+
+        initializeFields(frame, summaryPanel, ts);
 
         createAddButton();
         createRemoveButton();
@@ -46,6 +43,18 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.add(removeTransactionBtn);
         this.add(saveButton);
         this.add(loadButton);
+    }
+
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: initialises all fields
+     */
+    private void initializeFields(JFrame frame, TransactionSummaryPanel summaryPanel, TransactionSummary ts) {
+        this.frame = frame;
+        this.summary = ts;
+        this.summaryPanel = summaryPanel;
+        this.jsonReader = new JsonReader(JSON_STORE);
+        this.jsonWriter = new JsonWriter(JSON_STORE);
     }
 
     private void createAddButton() {
@@ -85,10 +94,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("addTransaction")) {
             new AddTransactionPane(this.summary, this.summaryPanel, this.frame);
-            summaryPanel.removeAll();
-            summaryPanel.displayTransactions(summary);
-            summaryPanel.revalidate();
-            summaryPanel.repaint();
+            updateDisplay();
             System.out.println(summary.getTransactionSummary());
         }
         if (e.getActionCommand().equals("removeTransaction")) {
@@ -100,6 +106,17 @@ public class ButtonPanel extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("loadTransactions")) {
             loadTransactionSummary();
         }
+    }
+
+    /**
+     * @MODIFIES: summaryPanel
+     * @EFFECTS: clears then displays the current state of summary
+     */
+    private void updateDisplay() {
+        summaryPanel.removeAll();
+        summaryPanel.displayTransactions(summary);
+        summaryPanel.revalidate();
+        summaryPanel.repaint();
     }
 
     /**
@@ -133,10 +150,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private void loadTransactionSummary() {
         try {
             summary = jsonReader.read();
-            summaryPanel.clear();
-            summaryPanel.displayTransactions(summary);
-            summaryPanel.revalidate();
-            summaryPanel.repaint();
+            updateDisplay();
             System.out.println("Loaded transaction summary" + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
