@@ -1,4 +1,4 @@
-package ui;
+package ui.panels;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +22,13 @@ public class ColumnTitlesPanel extends JPanel  {
 
 
         this.setLayout(new GridLayout(1,1, 2, 0));
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(Color.decode("#bababa"));
         add(date);
         add(details);
         add(amount);
         add(category);
 
         centerTitlesChangeFont();
-        setBackground(Color.decode("#757474"));
     }
 
     /**

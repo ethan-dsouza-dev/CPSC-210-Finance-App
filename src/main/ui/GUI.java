@@ -1,6 +1,9 @@
 package ui;
 
 import model.TransactionSummary;
+import ui.panels.ButtonPanel;
+import ui.panels.ColumnTitlesPanel;
+import ui.panels.TransactionSummaryPanel;
 
 import javax.swing.*;
 import java.awt.*;

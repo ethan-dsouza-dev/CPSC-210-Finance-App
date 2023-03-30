@@ -1,8 +1,11 @@
-package ui;
+package ui.panels;
 
+import model.Transaction;
 import model.TransactionSummary;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.panes.AddTransactionPane;
+import ui.panes.RemoveTransactionPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 // Represents a panel that holds the add, remove, save and load button.
 public class ButtonPanel extends JPanel implements ActionListener {
@@ -17,6 +21,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton removeTransactionBtn;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton greatestTransactionBtn;
     private JFrame frame;
 
     private static final String JSON_STORE = "./data/summary.json";
@@ -40,6 +45,14 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
         this.setBackground(Color.darkGray);
         this.setPreferredSize(new Dimension(100, 60));
+        addButtonsToPanel();
+    }
+
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: adds all buttons to this panel
+     */
+    private void addButtonsToPanel() {
         this.add(addTransactionBtn);
         this.add(removeTransactionBtn);
         this.add(saveButton);
@@ -58,6 +71,10 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.jsonWriter = new JsonWriter(JSON_STORE);
     }
 
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: creates a new instance of a JButton with text : "Add" and ActionListener linked to this ButtonPanel
+     */
     private void createAddButton() {
         addTransactionBtn = new JButton("Add");
         addTransactionBtn.setActionCommand("addTransaction");
@@ -65,6 +82,11 @@ public class ButtonPanel extends JPanel implements ActionListener {
         addTransactionBtn.setFocusable(false);
     }
 
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: creates a new instance of a JButton with text "Remove" and adds ActionListener to that button,
+     * linked to this ButtonPanel
+     */
     private void createRemoveButton() {
         removeTransactionBtn = new JButton("Remove");
         removeTransactionBtn.setActionCommand("removeTransaction");
@@ -72,6 +94,11 @@ public class ButtonPanel extends JPanel implements ActionListener {
         removeTransactionBtn.setFocusable(false);
     }
 
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: creates a new instance of a JButton with text "Load" and adds ActionListener to that button,
+     * linked to this ButtonPanel
+     */
     private void createLoadButton() {
         loadButton = new JButton("Load");
         loadButton.setActionCommand("loadTransactions");
@@ -79,12 +106,29 @@ public class ButtonPanel extends JPanel implements ActionListener {
         loadButton.setFocusable(false);
     }
 
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: creates a new instance of a JButton with text "Save" and adds ActionListener to that button,
+     * linked to this ButtonPanel
+     */
     private void createSaveButton() {
         saveButton = new JButton("Save");
         saveButton.setActionCommand("saveTransactions");
         saveButton.addActionListener(this);
         saveButton.setFocusable(false);
     }
+
+//    /**
+//     * @MODIFIES: this
+//     * @EFFECTS: creates a new instance of a JButton with text "Greatest Expense" and adds ActionListener to
+//     * that button, linked to this ButtonPanel
+//     */
+//    private void createGreatestTransactionButton() {
+//        greatestTransactionBtn = new JButton("Greatest Expense");
+//        greatestTransactionBtn.setActionCommand("findGreatestTransaction");
+//        greatestTransactionBtn.addActionListener(this);
+//        greatestTransactionBtn.setFocusable(false);
+//    }
 
     /**
      * Invoked when an action occurs.
@@ -107,6 +151,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("loadTransactions")) {
             loadTransactionSummary();
         }
+//        if (e.getActionCommand().equals("findGreatestTransaction")){
+//            findGreatestTransaction();
+//        }
     }
 
     /**
@@ -139,9 +186,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
             jsonWriter.write(ts);
             jsonWriter.close();
             System.out.println("Saved to " + JSON_STORE);
-            ImageIcon icon = new ImageIcon("./data/images/saved.png");
+            ImageIcon saveIcon = new ImageIcon("./data/images/saved.png");
             JOptionPane.showMessageDialog(null, "Transaction summary has been saved!",
-                    "Saved Transaction", JOptionPane.QUESTION_MESSAGE, icon);
+                    "Saved Transaction", JOptionPane.QUESTION_MESSAGE, saveIcon);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -165,5 +212,25 @@ public class ButtonPanel extends JPanel implements ActionListener {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+//
+//    /**
+//     * @MODIFIES: this
+//     * @EFFECTS: finds the greatest transaction amount for the month in transactionSummary and displays it on a
+//     * separate window.
+//     */
+//    private void findGreatestTransaction() {
+//        Transaction transaction = summary.findGreatestTransactionForMonth(LocalDate.now());
+//
+//        TransactionSummary ts = new TransactionSummary();
+//        ts.addTransaction(transaction);
+//
+//        TransactionSummaryPanel tempPanel = new TransactionSummaryPanel(this.frame, ts);
+//        Object[][] displayTransaction = {
+//                {"The greatest Transaction for the month was: "},
+//                {transaction}
+//        };
+//        ImageIcon largestExpenseIcon = new ImageIcon("./data/images/expensive.png");
+//    }
 
 }

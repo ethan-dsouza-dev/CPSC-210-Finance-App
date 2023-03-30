@@ -1,10 +1,10 @@
-package ui;
+package ui.panes;
 
 import model.Transaction;
 import model.TransactionSummary;
+import ui.panels.TransactionSummaryPanel;
 
 import javax.swing.*;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
