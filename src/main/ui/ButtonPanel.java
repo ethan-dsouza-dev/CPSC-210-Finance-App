@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Represents a panel that holds the add, remove, save and load button.
 public class ButtonPanel extends JPanel implements ActionListener {
     private JButton addTransactionBtn;
     private JButton removeTransactionBtn;
@@ -138,6 +139,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
             jsonWriter.write(ts);
             jsonWriter.close();
             System.out.println("Saved to " + JSON_STORE);
+            ImageIcon icon = new ImageIcon("./data/images/saved.png");
+            JOptionPane.showMessageDialog(null, "Transaction summary has been saved!",
+                    "Saved Transaction", JOptionPane.QUESTION_MESSAGE, icon);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -145,13 +149,18 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
     /**
      * @MODIFIES: this
-     * @EFFECTS: loads transactionSummary from file
+     * @EFFECTS: loads transactionSummary from file when OK button is pressed.
      */
     private void loadTransactionSummary() {
         try {
-            summary = jsonReader.read();
-            updateDisplay();
-            System.out.println("Loaded transaction summary" + " from " + JSON_STORE);
+            ImageIcon icon = new ImageIcon("./data/images/overwrite.png");
+            int option = JOptionPane.showConfirmDialog(null, "Current contents will be overwritten",
+                    "Load Transaction", JOptionPane.OK_CANCEL_OPTION, JOptionPane.NO_OPTION, icon);
+            if (option == JOptionPane.OK_OPTION) {
+                summary = jsonReader.read();
+                updateDisplay();
+                System.out.println("Loaded transaction summary" + " from " + JSON_STORE);
+            }
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

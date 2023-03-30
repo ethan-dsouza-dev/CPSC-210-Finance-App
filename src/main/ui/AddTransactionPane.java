@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+// Represents JOptionPane that opens to get Data for a transaction when user is adding it.
 public class AddTransactionPane {
 
     private JFormattedTextField dateField;
@@ -31,7 +32,7 @@ public class AddTransactionPane {
         amountField = new JFormattedTextField();
         categoryField = new JTextField();
 
-        ImageIcon icon = new ImageIcon("./data/budget.png");
+        ImageIcon icon = new ImageIcon("./data/images/budget.png");
 
         Object[][] fields = {
                 {"Enter Date (yyyy-mm-dd): ", dateField},

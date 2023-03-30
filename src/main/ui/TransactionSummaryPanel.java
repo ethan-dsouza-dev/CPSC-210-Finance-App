@@ -6,6 +6,7 @@ import model.TransactionSummary;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents a panel that holds the transactionSummary.
 public class TransactionSummaryPanel extends JPanel {
     private DataColumn dateColumn;
     private DataColumn detailColumn;
@@ -61,21 +62,6 @@ public class TransactionSummaryPanel extends JPanel {
             amountColumn.addData(String.valueOf(t.getAmount()));
             categoryColumn.addData(t.getCategory());
         }
-    }
-
-    /**
-     * @MODIFIES: this
-     * @EFFECTS: clears everything that is currently being displayed
-     */
-    public void resetColumns() {
-        dateColumn.clearData();
-        detailColumn.clearData();
-        amountColumn.clearData();
-        categoryColumn.clearData();
-    }
-
-    public void clear() {
-        removeAll();
     }
 
     public DataColumn getDateColumn() {

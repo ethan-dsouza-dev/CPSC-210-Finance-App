@@ -5,10 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents a Panel containing data of one of the fields of TransactionSummary
 public class DataColumn extends JPanel implements ActionListener {
     private JList<String> dataColumn;
     private DefaultListModel<String> data;
 
+    /**
+     * @EFFECTS: constructs a new DataColum with an empty DefaultListModel and a JList with that ListModel.
+     */
     public DataColumn() {
 
         this.data = new DefaultListModel<>();
@@ -28,15 +32,6 @@ public class DataColumn extends JPanel implements ActionListener {
         this.data.addElement(text);
         dataColumn = new JList<>((this.data));
     }
-
-    public void clearData() {
-        dataColumn = new JList<>();
-    }
-
-    public int getSelectedIndex() {
-        return dataColumn.getSelectedIndex();
-    }
-
 
     /**
      * Invoked when an action occurs.

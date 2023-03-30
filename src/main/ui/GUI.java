@@ -1,18 +1,20 @@
 package ui;
 
-import model.Transaction;
 import model.TransactionSummary;
 
 import javax.swing.*;
 import java.awt.*;
 
+// Represents the main JFrame of our application
 public class GUI extends JFrame {
 
     private JPanel buttonPanel;
     private TransactionSummaryPanel summaryPanel;
-
     private TransactionSummary transactionSummary;
 
+    /**
+     * @EFFECTS: constructs new GUI object with an empty transactionSummary
+     */
     public GUI() {
 
         super("The Personal Finance Tracker");
@@ -23,8 +25,8 @@ public class GUI extends JFrame {
 
         setLayout(new BorderLayout());
 
-        ImageIcon dog = new ImageIcon("./data/wealth.png");
-        setIconImage(dog.getImage());
+        ImageIcon icon = new ImageIcon("./data/images/wealth.png");
+        setIconImage(icon.getImage());
 
         summaryPanel = new TransactionSummaryPanel(this, transactionSummary);
         buttonPanel = new ButtonPanel(this, summaryPanel,transactionSummary);
