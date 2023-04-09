@@ -31,7 +31,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private TransactionSummaryPanel summaryPanel;
 
 
-
+    /**
+     * @EFFECTS: creates a new button panel with 4 buttons
+     */
     public ButtonPanel(JFrame frame, TransactionSummaryPanel summaryPanel, TransactionSummary ts) {
 
         super();
@@ -118,18 +120,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
         saveButton.setFocusable(false);
     }
 
-//    /**
-//     * @MODIFIES: this
-//     * @EFFECTS: creates a new instance of a JButton with text "Greatest Expense" and adds ActionListener to
-//     * that button, linked to this ButtonPanel
-//     */
-//    private void createGreatestTransactionButton() {
-//        greatestTransactionBtn = new JButton("Greatest Expense");
-//        greatestTransactionBtn.setActionCommand("findGreatestTransaction");
-//        greatestTransactionBtn.addActionListener(this);
-//        greatestTransactionBtn.setFocusable(false);
-//    }
-
     /**
      * Invoked when an action occurs.
      *
@@ -151,9 +141,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("loadTransactions")) {
             loadTransactionSummary();
         }
-//        if (e.getActionCommand().equals("findGreatestTransaction")){
-//            findGreatestTransaction();
-//        }
     }
 
     /**
@@ -212,25 +199,4 @@ public class ButtonPanel extends JPanel implements ActionListener {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-
-//
-//    /**
-//     * @MODIFIES: this
-//     * @EFFECTS: finds the greatest transaction amount for the month in transactionSummary and displays it on a
-//     * separate window.
-//     */
-//    private void findGreatestTransaction() {
-//        Transaction transaction = summary.findGreatestTransactionForMonth(LocalDate.now());
-//
-//        TransactionSummary ts = new TransactionSummary();
-//        ts.addTransaction(transaction);
-//
-//        TransactionSummaryPanel tempPanel = new TransactionSummaryPanel(this.frame, ts);
-//        Object[][] displayTransaction = {
-//                {"The greatest Transaction for the month was: "},
-//                {transaction}
-//        };
-//        ImageIcon largestExpenseIcon = new ImageIcon("./data/images/expensive.png");
-//    }
-
 }

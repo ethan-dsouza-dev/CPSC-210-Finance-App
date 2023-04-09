@@ -63,3 +63,12 @@ labeled "Save", found in the bottom panel.
   - After this a pop-up window will show up to confirm that you want to load the state.
   - Press the button labeled "OK" and the transaction summary from the last saved file
     will be loaded.
+
+## Event Logging
+Event Log:
+
+Added Transaction: 2023-04-01; Fools Day; 4001.0
+
+Added Transaction: 2023-04-07; Hackathon; 20.0
+
+Removed Transaction with Detail: Fools Day

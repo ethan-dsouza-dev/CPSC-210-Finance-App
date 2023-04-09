@@ -27,6 +27,8 @@ public class TransactionSummary implements Writable {
      */
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+        EventLog.getInstance().logEvent(new Event("Added Transaction: " + transaction.getDate() + "; "
+                + transaction.getDetails() + "; " + transaction.getAmount()));
     }
 
     /**
@@ -43,6 +45,7 @@ public class TransactionSummary implements Writable {
      */
     public void removeTransaction(int index) {
         transactions.remove(index);
+        EventLog.getInstance().logEvent(new Event("Removed Transaction at index: " + index));
     }
 
     /**
@@ -52,9 +55,10 @@ public class TransactionSummary implements Writable {
     public void removeTransactionWithDetails(String detail) {
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getDetails().equals(detail)) {
-                removeTransaction(i);
+                transactions.remove(i);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Removed Transaction with Detail: " + detail));
     }
 
     /**

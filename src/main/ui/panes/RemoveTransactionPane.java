@@ -27,7 +27,6 @@ public class RemoveTransactionPane {
         if (option == JOptionPane.OK_OPTION) {
             transactionSummary.removeTransactionWithDetails(detailsField.getText());
             updateDisplay(transactionSummary, summaryPanel);
-            System.out.println(transactionSummary.getNumberTransactions());
         }
     }
 

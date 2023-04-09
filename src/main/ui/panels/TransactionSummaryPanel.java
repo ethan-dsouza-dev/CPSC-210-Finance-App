@@ -63,8 +63,4 @@ public class TransactionSummaryPanel extends JPanel {
             categoryColumn.addData(t.getCategory());
         }
     }
-
-    public DataColumn getDateColumn() {
-        return this.dateColumn;
-    }
 }
