@@ -64,7 +64,7 @@ labeled "Save", found in the bottom panel.
   - Press the button labeled "OK" and the transaction summary from the last saved file
     will be loaded.
 
-## Event Logging
+## Phase 4: Task 2
 Event Log:
 
 Added Transaction: 2023-04-01; Fools Day; 4001.0
