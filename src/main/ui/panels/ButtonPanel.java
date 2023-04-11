@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
 
 // Represents a panel that holds the add, remove, save and load button.
 public class ButtonPanel extends JPanel implements ActionListener {
@@ -21,7 +20,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton removeTransactionBtn;
     private JButton saveButton;
     private JButton loadButton;
-    private JButton greatestTransactionBtn;
     private JFrame frame;
 
     private static final String JSON_STORE = "./data/summary.json";
@@ -128,7 +126,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("addTransaction")) {
-            new AddTransactionPane(this.summary, this.summaryPanel, this.frame);
+            new AddTransactionPane(this.summary, this.summaryPanel);
             updateDisplay();
             System.out.println(summary.getTransactionSummary());
         }

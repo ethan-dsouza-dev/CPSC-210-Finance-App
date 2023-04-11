@@ -3,7 +3,6 @@ package model;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 // Represents a transaction with multiple attributes.
 public class Transaction {

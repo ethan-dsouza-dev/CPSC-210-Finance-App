@@ -15,9 +15,10 @@ import java.awt.event.WindowEvent;
 // Represents the main JFrame of our application
 public class FinanceAppGUI extends JFrame {
 
-    private JPanel buttonPanel;
+    private ButtonPanel buttonPanel;
     private TransactionSummaryPanel summaryPanel;
     private TransactionSummary transactionSummary;
+    private ColumnTitlesPanel columnTitlesPanel;
 
     /**
      * @EFFECTS: constructs new GUI object with an empty transactionSummary
@@ -26,24 +27,10 @@ public class FinanceAppGUI extends JFrame {
 
         super("The Personal Finance Tracker");
         transactionSummary = new TransactionSummary();
+        columnTitlesPanel = new ColumnTitlesPanel();
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            /**
-             * Invoked when a window is in the process of being closed.
-             * The close operation can be overridden at this point.
-             *
-             * @param e
-             */
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Event Log:");
-                for (Event event : EventLog.getInstance()) {
-                    System.out.println(event.getDescription());
-                }
-                System.exit(0);
-            }
-        });
+        addWindowListenerToFrame();
         setSize(new Dimension(750, 750));
 
         setLayout(new BorderLayout());
@@ -54,7 +41,7 @@ public class FinanceAppGUI extends JFrame {
         summaryPanel = new TransactionSummaryPanel(this, transactionSummary);
         buttonPanel = new ButtonPanel(this, summaryPanel,transactionSummary);
 
-        add(new ColumnTitlesPanel(), BorderLayout.NORTH);
+        add(columnTitlesPanel, BorderLayout.NORTH);
         add(summaryPanel);
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -62,5 +49,28 @@ public class FinanceAppGUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
+    }
+
+    /**
+     * @MODIFIES: this
+     * @EFFECTS: Adds a window listener to this frame and overrides windowClosing to print the EventLog when
+     * the window is closed.
+     */
+    private void addWindowListenerToFrame() {
+        addWindowListener(new WindowAdapter() {
+            /**
+             * Invoked when a window is in the process of being closed.
+             * The close operation can be overridden at this point.
+             *
+             */
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Event Log:");
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.getDescription());
+                }
+                System.exit(0);
+            }
+        });
     }
 }

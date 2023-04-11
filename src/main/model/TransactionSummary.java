@@ -5,10 +5,8 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Objects;
 
 // Represents a Transaction summary (a list of transactions) and the methods that can be done on the list.
 public class TransactionSummary implements Writable {

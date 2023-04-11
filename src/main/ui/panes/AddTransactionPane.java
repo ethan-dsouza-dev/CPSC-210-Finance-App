@@ -18,13 +18,11 @@ public class AddTransactionPane {
     private JTextField categoryField;
     private TransactionSummary summary;
     private TransactionSummaryPanel summaryPanel;
-    private JFrame frame;
 
     /**
      * @EFFECTS: creates a new AddTransactionPane with fields initialised to JFormattedTextFields
      */
-    public AddTransactionPane(TransactionSummary transactionSummary, TransactionSummaryPanel summaryPanel,
-                              JFrame frame) {
+    public AddTransactionPane(TransactionSummary transactionSummary, TransactionSummaryPanel summaryPanel) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateField = new JFormattedTextField(dateFormat);
         detailsField = new JTextField();
@@ -44,8 +42,6 @@ public class AddTransactionPane {
 
         int option = JOptionPane.showConfirmDialog(null, fields, "Add Transaction",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.NO_OPTION, icon);
-
-        this.frame = frame;
         this.summary = transactionSummary;
         this.summaryPanel = summaryPanel;
         addToTransactionSummary(transactionSummary, option);
