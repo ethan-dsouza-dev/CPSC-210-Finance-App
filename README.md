@@ -66,21 +66,24 @@ labeled "Save", found in the bottom panel.
 
 ## Phase 4: Task 2
 Note: When a program state is loaded from the saved file, the log will display the events in the saved file as being
-added to the TransactionSummary.
-
+added to the ```TransactionSummary```.
+```
 Event Log:  
 Added Transaction: 2023-04-01; Fools Day; 4001.0  
 Added Transaction: 2023-04-07; Hackathon; 20.0  
 Removed Transaction with Detail: Fools Day
+``` 
 
 ## Phase 4: Task 3
-After careful analysis of my program I would consider refactoring my TransactionSummary class
+After careful analysis of my program I would consider refactoring my ```TransactionSummary``` class
 to use the Singleton pattern, because only 1 instance of the class is passed throughout the program.
-Therefore, it would be more efficient to have only 1 instance accessible by all classes. Furthermore, I 
-would implement an Observer design to make it easier to add more functionality in the future. I would have an
-observer class that would notify every class that was associated with the TransactionSummary class when an instance 
-of TransactionSummary is changed. This means the current TransactionSummary will not need to be passed in through 
-multiple classes. Adding an Observer class would 
-take time and not be worth it for the number of features I have right now. However, if I wanted to add additional 
-panels to the app then having all screens be updated with what the current state of the TransactionSummary will 
-eliminate the need to repetitively pass the current TransactionSummary as a parameter to all panels.
+Therefore, it would be more efficient to have only 1 instance accessible by all classes. I could also 
+implement an Observer design to make it easier to add more functionality in the future. I would have an
+observer class that would notify every class that was associated with the ```TransactionSummary``` class when 
+an instance of ```TransactionSummary``` is changed. This means the current ```TransactionSummary``` will not need
+to be passed in through multiple classes. Adding an Observer class would take time and not be worth it for the number
+of features I have right now. However, if I wanted to add additional 
+panels to the app, then having all panels be updated with the current state of  ```TransactionSummary``` will 
+eliminate the need to repetitively pass the current ```TransactionSummary``` as a parameter to all panels. Adding a 
+Singleton would take less time initially but I think having an Observer would allow my design to be more flexible and 
+maintainable in the future.
