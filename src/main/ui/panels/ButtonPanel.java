@@ -1,6 +1,5 @@
 package ui.panels;
 
-import model.Transaction;
 import model.TransactionSummary;
 import persistence.JsonReader;
 import persistence.JsonWriter;

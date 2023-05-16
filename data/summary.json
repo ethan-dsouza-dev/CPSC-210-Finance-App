@@ -1,14 +1,1 @@
-{"transactions": [
-    {
-        "date": "2023-06-25",
-        "amount": 3213,
-        "details": "Marker",
-        "category": "School"
-    },
-    {
-        "date": "2023-09-06",
-        "amount": 1234,
-        "details": "Stogies",
-        "category": "adsf"
-    }
-]}
+{"transactions": []}
